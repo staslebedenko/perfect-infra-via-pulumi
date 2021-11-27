@@ -42,6 +42,23 @@ And set a desired location of your Azure resources.
 pulumi config set azure-native:location northeurope
 ```
 
+Open the result in Visual studio code, change the group name
+
+And run the following command to preview changes on Azure.
+
+```
+pulumi preview
+```
+
+Then we will deploy changes via
+```
+pulumi up
+```
+
+
+## The GitHub step
+
+I assume that you know how to create a new GitHub repository and clone it to the local environment.
 
 # Get principal credentials from your Azure subscription via Azure CLI. Password based.
 And get your subscription ID
@@ -77,7 +94,7 @@ AppId is the client ID
 Password is the client secret
 Tenant is the tenant ID
 
-Then prepare the following strings and run them from a local command prompt, so Pulumi can use them later on with pipelines.
+Then prepare the following strings and run them from a local command prompt(or terminal in VSCode), so Pulumi can use them later on with pipelines.
 
 ```
 pulumi config set azure-native:clientId <clientID>
@@ -90,8 +107,63 @@ pulumi config set azure-native:subscriptionId <subscriptionId>
 ```
 
 
+
 Then you should Create a new access token on Pulumi web site
 https://app.pulumi.com/yourname/settings/tokens
 
 And add it to the GitHub repository secret settings.
-Repository settings, add secret menu.
+Repository settings, add secret menu with the following name
+
+```
+PULUMI_ACCESS_TOKEN
+```
+
+Now we can proceed to the GitHub UI and click Action menu on a github.
+
+Enter a new name pull_request.yml
+
+And replace existing code with following sample
+
+```
+name: Pulumi
+on:
+  push:
+    branches: [ main ]
+jobs:
+  up:
+    name: Preview
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pulumi/actions@v3
+        with:
+          command: preview
+          stack-name: dev
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+```
+
+Then we need to add
+
+```
+name: Pulumi
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  up:
+    name: Update
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup DotNet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1
+      - uses: pulumi/actions@v3
+        with:
+          command: up
+          stack-name: dev
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+```
