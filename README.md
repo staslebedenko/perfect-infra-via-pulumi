@@ -32,7 +32,7 @@ After login close browser window
 
 And start with setup of the new pulumi project(You will be prompted to login)
 ```
-pulumi new azure-csharp
+pulumi new azure-csharp --force
 ```
 
 Then choose the name of the current stack
