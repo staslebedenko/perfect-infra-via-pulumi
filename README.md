@@ -106,6 +106,14 @@ pulumi config set azure-native:tenantId <tenantID>
 pulumi config set azure-native:subscriptionId <subscriptionId>
 ```
 
+There is a need to add this values to the secrects in GitHub as well
+
+```
+          ARM_CLIENT_ID
+          ARM_CLIENT_SECRET
+          ARM_TENANT_ID
+          ARM_SUBSCRIPTION_ID
+```
 
 
 Then you should Create a new access token on Pulumi web site
@@ -141,6 +149,12 @@ jobs:
           stack-name: dev
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_ENVIRONMENT: public
+          ARM_LOCATION: northeurope
 ```
 
 Then we need to add
@@ -166,4 +180,10 @@ jobs:
           stack-name: dev
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_ENVIRONMENT: public
+          ARM_LOCATION: northeurope
 ```
