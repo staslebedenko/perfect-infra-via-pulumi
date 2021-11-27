@@ -1,0 +1,7 @@
+config:
+  azure-native:clientId: 33704584-db55-40
+  azure-native:clientSecret:
+    secure: AAABAJWLNLGHj64FFRscF8biXxmnPVqJgf31DmgkYr
+  azure-native:location: northeurope
+  azure-native:subscriptionId: 07b49539-6f25-484
+  azure-native:tenantId: 53e93ede-ec5b-4
