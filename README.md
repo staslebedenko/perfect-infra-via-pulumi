@@ -65,7 +65,7 @@ I assume that you know how to create a new GitHub repository and clone it to the
 And get your subscription ID
 
 ```
-  az ad sp create-for-rbac --name ServicePrincipalName --role Contributor
+  az ad sp create-for-rbac --name WorkshopPrincipallName --role Contributor
   
   # save the ouput
   
