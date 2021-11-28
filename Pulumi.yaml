@@ -1,3 +1,0 @@
-name: perfect-infra-via-pulumi
-runtime: dotnet
-description: A minimal Azure Native C# Pulumi program
