@@ -148,7 +148,7 @@ And replace existing code with following sample
 ```
 name: Pulumi
 on:
-  push:
+  pull_request:
     branches: [ main ]
 jobs:
   up:
@@ -177,7 +177,7 @@ Then we need to add
 ```
 name: Pulumi
 on:
-  pull_request:
+  push:
     branches: [ main ]
 jobs:
   up:
