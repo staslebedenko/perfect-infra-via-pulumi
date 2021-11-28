@@ -97,6 +97,8 @@ Tenant is the tenant ID
 
 Then prepare the following strings and run them from a local command prompt(or terminal in VSCode), so Pulumi can use them later on with pipelines.
 
+Be aware that this principal can expire and you will need to update it, if your pipelines stopped working.
+
 The first option is to set variables and secrect via Pulumi command line.
 
 ```
