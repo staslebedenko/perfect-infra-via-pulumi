@@ -23,7 +23,9 @@ ommand to open VS code with the current folder.
 code .
 ```
 
-Then proceed with Terminal windows inside VSCode with 
+Then proceed with Terminal windows inside VSCode with AZ login
+This is for the demo purposes, for production you need to use environment variables later on with limited access principal,
+to resources that is needed for your particular services.
 
 ```
 az login
@@ -54,7 +56,6 @@ Then we will deploy changes via
 ```
 pulumi up
 ```
-
 
 ## The GitHub step
 
@@ -96,6 +97,8 @@ Tenant is the tenant ID
 
 Then prepare the following strings and run them from a local command prompt(or terminal in VSCode), so Pulumi can use them later on with pipelines.
 
+The first option is to set variables and secrect via Pulumi command line.
+
 ```
 pulumi config set azure-native:clientId <clientID>
 
@@ -115,6 +118,14 @@ There is a need to add this values to the secrects in GitHub as well
           ARM_SUBSCRIPTION_ID
 ```
 
+and to the local environment variables
+
+```
+setx ARM_CLIENT_ID "<clientID>"
+setx ARM_CLIENT_SECRET "<clientSecret>"
+setx ARM_TENANT_ID "<tenantID>"
+setx ARM_SUBSCRIPTION_ID "<subscriptionId>"
+```
 
 Then you should Create a new access token on Pulumi web site
 https://app.pulumi.com/yourname/settings/tokens
@@ -157,6 +168,8 @@ jobs:
           ARM_LOCATION: northeurope
 ```
 
+And create a new pull request.
+
 Then we need to add
 
 ```
@@ -187,3 +200,5 @@ jobs:
           ARM_ENVIRONMENT: public
           ARM_LOCATION: northeurope
 ```
+
+How cool is that :)
