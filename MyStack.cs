@@ -23,6 +23,7 @@ class MyStack : Stack
         });
 
         // Export the primary key of the Storage Account
+        
         this.PrimaryStorageKey = Output.Tuple(resourceGroup.Name, storageAccount.Name).Apply(names =>
             Output.CreateSecret(GetStorageAccountPrimaryKey(names.Item1, names.Item2)));
     }
