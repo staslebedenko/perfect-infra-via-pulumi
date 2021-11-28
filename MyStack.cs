@@ -3,6 +3,8 @@ using Pulumi;
 using Pulumi.AzureNative.Resources;
 using Pulumi.AzureNative.Storage;
 using Pulumi.AzureNative.Storage.Inputs;
+using Pulumi.AzureNative.Web;
+using Pulumi.AzureNative.Web.Inputs;
 
 class MyStack : Stack
 {
@@ -23,9 +25,23 @@ class MyStack : Stack
         });
 
         // Export the primary key of the Storage Account
-        
         this.PrimaryStorageKey = Output.Tuple(resourceGroup.Name, storageAccount.Name).Apply(names =>
             Output.CreateSecret(GetStorageAccountPrimaryKey(names.Item1, names.Item2)));
+
+        var appServicePlan = new AppServicePlan("festive-function-plan", new AppServicePlanArgs{
+            ResourceGroupName = resourceGroup.Name,
+            Kind = "Windows",
+            Sku = new  SkuDescriptionArgs {
+                Tier = "Dynamic",
+                Name = "Y1"
+            }
+        });
+
+        var app = new WebApp("festive-webapi-app", new WebAppArgs{
+            Kind = "FunctionApp",
+            ResourceGroupName = resourceGroup.Name,
+            ServerFarmId = appServicePlan.Id
+        });
     }
 
     [Output]
