@@ -24,30 +24,30 @@ class MyStack : Stack
         });
 
         // Create an Azure resource (Storage Account)
-        // var storageAccount = new StorageAccount("fancyaccount", new StorageAccountArgs
-        // {
-        //     ResourceGroupName = resourceGroup.Name,
-        //     Location = "northeurope",
-        //     Sku = new SkuArgs
-        //     {
-        //         Name = SkuName.Standard_LRS
-        //     },
-        //     Kind = Kind.StorageV2
-        // });
+        var storageAccount = new StorageAccount("fancyaccount", new StorageAccountArgs
+        {
+            ResourceGroupName = resourceGroup.Name,
+            Location = "northeurope",
+            Sku = new SkuArgs
+            {
+                Name = SkuName.Standard_LRS
+            },
+            Kind = Kind.StorageV2
+        });
 
         // Export the primary key of the Storage Account
         
         // this.PrimaryStorageKey = Output.Tuple(resourceGroup.Name, storageAccount.Name).Apply(names =>
         //     Output.CreateSecret(GetStorageAccountPrimaryKey(names.Item1, names.Item2)));
 
-        // var appServicePlan = new AppServicePlan("festive-function-plan", new AppServicePlanArgs{
-        //     ResourceGroupName = resourceGroup.Name,
-        //     Kind = "Windows",
-        //     Sku = new  SkuDescriptionArgs {
-        //         Tier = "Dynamic",
-        //         Name = "Y1"
-        //     }
-        // });
+        var appServicePlan = new AppServicePlan("festive-function-plan", new AppServicePlanArgs{
+            ResourceGroupName = resourceGroup.Name,
+            Kind = "Windows",
+            Sku = new  SkuDescriptionArgs {
+                Tier = "Dynamic",
+                Name = "Y1"
+            }
+        });
 
         // var app = new WebApp("festive-webapi-app", new WebAppArgs{
         //     Kind = "FunctionApp",
